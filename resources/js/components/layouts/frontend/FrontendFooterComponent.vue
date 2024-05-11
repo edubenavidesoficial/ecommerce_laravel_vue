@@ -99,7 +99,7 @@
         </div>
     </footer>
     <div class="whatsapp-button">
-        <a class="whatsapp-icon" href="https://wa.me/593959257511?text=Hola%21%20Gracias%20por%20ponerte%20en%20contacto%20con%20Spazio%20Dise%C3%B1o%20y%20Confort.%20Estamos%20encantados%20de%20ayudarte.%20Por%20favor%2C%20d%C3%A9janos%20saber%20en%20qu%C3%A9%20podemos%20ayudarte%20y%20te%20responderemos%20lo%20antes%20posible."
+        <a class="whatsapp-icon" href="https://wa.me/whastapp?text=Hola%21%20Gracias%20por%20ponerte%20en%20contacto%20con%20Spazio%20Dise%C3%B1o%20y%20Confort.%20Estamos%20encantados%20de%20ayudarte.%20Por%20favor%2C%20d%C3%A9janos%20saber%20en%20qu%C3%A9%20podemos%20ayudarte%20y%20te%20responderemos%20lo%20antes%20posible."
            target="_blank"
            rel="noopener noreferrer">
             <i class="lab-fill-calling flex-shrink-0 text-white"></i>
