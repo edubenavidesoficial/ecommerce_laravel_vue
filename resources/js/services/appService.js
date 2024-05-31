@@ -110,8 +110,8 @@ export default {
         return text;
     },
     htmlTagRemover: function (text) {
-        if ((text != null && text !== '' && isNaN(text))) {
-            return text.replace(/(<([^>]+)>)/ig, '');
+        if ((text !=null && text !=='' && isNaN(text))) {
+            return text.replace( /(<([^>]+)>)/ig, '');
         }
         return text;
     },
@@ -153,7 +153,7 @@ export default {
         return response;
     },
 
-    responsiveLoad: function () {
+    responsiveLoad: function() {
         let mainHeader = document?.querySelector(".db-header");
         let subHeader = document?.querySelector(".sub-header");
         let mainHeight = mainHeader?.scrollHeight;
@@ -181,12 +181,12 @@ export default {
     },
     destroyConfirmation: function () {
         return new VueSimpleAlert.confirm(
-            "¡No podrás recuperar el registro eliminado!",
-            "¿Estás seguro?",
+            "You will not be able to recover the deleted record!",
+            "Are you sure?",
             "warning",
             {
-                confirmButtonText: "¡Sí, eliminarlo!",
-                cancelButtonText: "¡No, cancelar!",
+                confirmButtonText: "Yes, Delete it!",
+                cancelButtonText: "No, Cancel!",
                 confirmButtonColor: "#696cff",
                 cancelButtonColor: "#8592a3",
             }
@@ -203,58 +203,58 @@ export default {
     underscoreToSpace: function (str) {
         return str.replace(/_/g, ' ');
     },
-    decimalPoint: function (num, length = 2) {
-        return Number.parseFloat(num).toFixed(length);
+    decimalPoint: function (num,length=2) {
+       return Number.parseFloat(num).toFixed(length);
     },
     orderStatusClass: function (status) {
-        if (status === orderStatusEnum.PENDING) {
-            return "bg-amber-100 text-amber-500";
-        }
-        else if (status === orderStatusEnum.CONFIRMED) {
-            return "bg-indigo-100 text-indigo-500";
-        }
-        else if (status === orderStatusEnum.ON_THE_WAY) {
-            return "bg-cyan-100 text-cyan-500";
-        }
-        else if (status === orderStatusEnum.DELIVERED) {
-            return "bg-green-100 text-green-500";
-        }
-        else if (status === orderStatusEnum.CANCELED) {
-            return "bg-red-100 text-red-500";
-        }
-        else {
-            return "bg-red-100 text-red-500";
-        }
-    },
+        if(status === orderStatusEnum.PENDING){
+           return "bg-amber-100 text-amber-500";
+       }
+       else if(status === orderStatusEnum.CONFIRMED){
+           return "bg-indigo-100 text-indigo-500";
+       }
+       else if(status === orderStatusEnum.ON_THE_WAY){
+           return "bg-cyan-100 text-cyan-500";
+       }
+       else if(status === orderStatusEnum.DELIVERED){
+           return "bg-green-100 text-green-500";
+       }
+       else if(status === orderStatusEnum.CANCELED){
+           return "bg-red-100 text-red-500";
+       }
+       else {
+           return "bg-red-100 text-red-500";
+       }
+   },
 
-    purchasePaymentStatusClass: function (status) {
-        if (status === purchasePaymentStatusEnum.PENDING) {
-            return "bg-amber-100 text-amber-500";
+   purchasePaymentStatusClass: function (status) {
+        if(status === purchasePaymentStatusEnum.PENDING){
+        return "bg-amber-100 text-amber-500";
         }
-        else if (status === purchasePaymentStatusEnum.PARTIAL_PAID) {
+        else if(status === purchasePaymentStatusEnum.PARTIAL_PAID){
             return "bg-indigo-100 text-indigo-500";
         }
-        else if (status === purchasePaymentStatusEnum.FULLY_PAID) {
+        else if(status === purchasePaymentStatusEnum.FULLY_PAID){
             return "bg-green-100 text-green-500";
         }
     },
     purchaseStatusClass: function (status) {
-        if (status === purchaseStatusEnum.PENDING) {
-            return "bg-amber-100 text-amber-500";
+        if(status === purchaseStatusEnum.PENDING){
+        return "bg-amber-100 text-amber-500";
         }
-        else if (status === purchaseStatusEnum.ORDERED) {
+        else if(status === purchaseStatusEnum.ORDERED){
             return "bg-indigo-100 text-indigo-500";
         }
-        else if (status === purchaseStatusEnum.RECEIVED) {
+        else if(status === purchaseStatusEnum.RECEIVED){
             return "bg-green-100 text-green-500";
         }
     },
 
-    returnStatusClass: function (status) {
-        if (status == returnStatusEnum.PENDING) {
-            return "text-[#F6A609]";
+   returnStatusClass: function (status) {
+        if(status == returnStatusEnum.PENDING){
+        return "text-[#F6A609]";
         }
-        else if (status == returnStatusEnum.ACCEPT) {
+        else if(status == returnStatusEnum.ACCEPT){
             return "text-[#2AC769]";
         }
         else {
@@ -262,28 +262,28 @@ export default {
         }
     },
 
-    cancelOrder: function () {
+   cancelOrder: function () {
         return new VueSimpleAlert.confirm(
-            "¿Deseas cancelar tu orden?",
-            "¿Estás seguro?",
+            "You want to cancel your order?",
+            "Are you sure?",
             "warning",
-            {
-                confirmButtonText: "¡Sí, cancelarla!",
-                cancelButtonText: "¡No, cancelar!",
-                confirmButtonColor: "#696cff",
-                cancelButtonColor: "#8592a3",
-            }
+                {
+                    confirmButtonText: "Yes, Cancel it!",
+                    cancelButtonText: "No, Cancel",
+                    confirmButtonColor: "#696cff",
+                    cancelButtonColor: "#8592a3",
+                }
         );
     },
 
     acceptOrder: function () {
         return new VueSimpleAlert.confirm(
-            "¡No podrás cancelar la orden!",
-            "¿Estás seguro?",
+            "You will not be able to cancel the order!",
+            "Are you sure?",
             "warning",
             {
-                confirmButtonText: "¡Sí, aceptarla!",
-                cancelButtonText: "¡No, cancelarla!",
+                confirmButtonText: "Yes, Accept it!",
+                cancelButtonText: "No, Cancel!",
                 confirmButtonColor: "#696cff",
                 cancelButtonColor: "#8592a3",
             }

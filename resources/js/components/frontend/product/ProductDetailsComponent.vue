@@ -1,26 +1,26 @@
 <template>
-    <LoadingComponent :props="loading" />
+    <LoadingComponent :props="loading"/>
     <section class="mb-12">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <CategoryBreadcrumbComponent :categories="categories" />
+                    <CategoryBreadcrumbComponent :categories="categories"/>
                 </div>
 
                 <div v-if="images.length" class="col-12 sm:col-6 lg:col-5">
                     <Swiper dir="ltr" :spaceBetween="10" :navigation="true" :thumbs="{ swiper: thumbsSwiper }"
-                        :modules="modules" class="gallery-swiper">
+                            :modules="modules" class="gallery-swiper">
                         <SwiperSlide v-for="(image, index) in images" :key="index" class="w-full">
-                            <img class="w-full rounded-2xl" :src="image" alt="gallery" loading="lazy" />
+                            <img class="w-full rounded-2xl" :src="image" alt="gallery" loading="lazy"/>
                         </SwiperSlide>
                     </Swiper>
 
                     <Swiper dir="ltr" @swiper="setThumbsSwiper" :spaceBetween="12" :slidesPerView="4" :freeMode="true"
-                        :watchSlidesProgress="true" :modules="modules" class="thumb-swiper">
+                            :watchSlidesProgress="true" :modules="modules" class="thumb-swiper">
                         <SwiperSlide v-for="(image, index) in images" :key="index"
-                            class="w-full cursor-pointer rounded-lg border border-gray-200 transition-all duration-500">
+                                     class="w-full cursor-pointer rounded-lg border border-gray-200 transition-all duration-500">
                             <img class="w-full rounded-lg border-2 border-gray-200 transition-all duration-500"
-                                :src="image" alt="gallery" loading="lazy" />
+                                 :src="image" alt="gallery" loading="lazy"/>
                         </SwiperSlide>
                     </Swiper>
                 </div>
@@ -34,51 +34,52 @@
                     <h3 class="flex items-start gap-4 mb-5">
                         <span class="text-2xl font-bold">
                             {{
-        currencyFormat(temp.price, setting.site_digit_after_decimal_point,
-            setting.site_default_currency_symbol, setting.site_currency_position)
-    }}
+                                currencyFormat(temp.price, setting.site_digit_after_decimal_point,
+                                    setting.site_default_currency_symbol, setting.site_currency_position)
+                            }}
                         </span>
                         <del v-if="product.is_offer" class="text-lg font-bold text-shopperz-red">
                             {{
-        currencyFormat(temp.oldPrice, setting.site_digit_after_decimal_point,
-            setting.site_default_currency_symbol, setting.site_currency_position)
-    }}
+                                currencyFormat(temp.oldPrice, setting.site_digit_after_decimal_point,
+                                    setting.site_default_currency_symbol, setting.site_currency_position)
+                            }}
                         </del>
                     </h3>
 
                     <div class="flex flex-wrap items-center gap-2 border-b border-gray-100 mb-6 pb-6">
                         <starRating border-color="#FFBC1F" :rounded-corners="true" :padding="2.5" :border-width="2.5"
-                            :star-size="11" class="-mt-0.5" inactive-color="#FFFFFF" active-color="#FFBC1F"
-                            :round-start-rating="false" :show-rating="false" :read-only="true" :max-rating="5"
-                            :rating="(product.rating_star / product.rating_star_count)" />
+                                    :star-size="11" class="-mt-0.5" inactive-color="#FFFFFF" active-color="#FFBC1F"
+                                    :round-start-rating="false" :show-rating="false" :read-only="true" :max-rating="5"
+                                    :rating="(product.rating_star / product.rating_star_count)"/>
                         <div v-if="product.rating_star_count > 0" class="flex items-center gap-1">
-                            <span class="text-base font-medium whitespace-nowrap text-text">
-                                {{ (product.rating_star / product.rating_star_count).toFixed(1) }}
-                            </span>
+                                <span class="text-base font-medium whitespace-nowrap text-text">
+                                    {{ (product.rating_star / product.rating_star_count).toFixed(1) }}
+                                </span>
                             <span
                                 class="text-base font-medium whitespace-nowrap text-text hover:text-primary cursor-pointer">
                                 ({{
-        product.rating_star_count
-    }} {{ product.rating_star_count > 1 ? $t('label.reviews') : $t('label.review') }})
+                                    product.rating_star_count
+                                }} {{ product.rating_star_count > 1 ? $t('label.reviews') : $t('label.review') }})
                             </span>
                         </div>
                     </div>
 
                     <VariationComponent v-if="initialVariations.length > 0 && variationComponent"
-                        :method="selectedVariationMethod" :variations="initialVariations" />
+                                        :method="selectedVariationMethod"
+                                        :variations="initialVariations"/>
 
                     <dl class="flex flex-wrap items-center gap-x-6 gap-y-3 mb-8">
                         <dt class="capitalize text-lg font-semibold">{{ $t('label.quantity') }}:</dt>
                         <dd class="flex items-center gap-6">
                             <div class="flex items-center gap-1 w-20 p-1 rounded-full bg-[#F7F7FC]">
                                 <button @click.prevent="quantityDecrement" type="button"
-                                    :class="temp.quantity === 1 ? 'cursor-not-allowed' : ''"
-                                    class="lab-fill-circle-minus text-lg leading-none transition-all duration-300 hover:text-primary"></button>
+                                        :class="temp.quantity === 1 ? 'cursor-not-allowed': ''"
+                                        class="lab-fill-circle-minus text-lg leading-none transition-all duration-300 hover:text-primary"></button>
                                 <input type="number" v-model="temp.quantity" v-on:keypress="onlyNumber($event)"
-                                    v-on:keyup="quantityUp" class="text-center w-full h-5 text-sm font-medium">
+                                       v-on:keyup="quantityUp" class="text-center w-full h-5 text-sm font-medium">
                                 <button @click.prevent="quantityIncrement" type="button"
-                                    :class="temp.stock === temp.quantity ? 'cursor-not-allowed' : ''"
-                                    class="lab-fill-circle-plus text-lg leading-none transition-all duration-300 hover:text-primary"></button>
+                                        :class="temp.stock === temp.quantity ? 'cursor-not-allowed': ''"
+                                        class="lab-fill-circle-plus text-lg leading-none transition-all duration-300 hover:text-primary"></button>
                             </div>
                             <div v-if="!initialVariations.length || selectedVariation != null">
                                 <p v-if="temp.stock > 0" class="capitalize">
@@ -97,33 +98,27 @@
                         <dt class="capitalize text-lg font-semibold">{{ $t('label.total_price') }}:</dt>
                         <dd class="flex items-center gap-6 text-green-500 font-semibold text-lg">
                             {{
-        currencyFormat(temp.totalPrice, setting.site_digit_after_decimal_point,
-            setting.site_default_currency_symbol, setting.site_currency_position)
-    }}
+                                currencyFormat(temp.totalPrice, setting.site_digit_after_decimal_point,
+                                    setting.site_default_currency_symbol, setting.site_currency_position)
+                            }}
                         </dd>
                     </dl>
 
                     <div class="flex flex-wrap items-center gap-8 mb-10">
                         <button @click.prevent="addToCart" :disabled="enableAddToCardButton" type="button"
-                            :class="enableAddToCardButton === false ? 'shadow-btn-primary !bg-primary' : ''"
-                            class="flex items-center gap-3 px-8 h-12 leading-12 rounded-full transition-all duration-500 bg-slate-400 text-white">
+                                :class="enableAddToCardButton === false ? 'shadow-btn-primary !bg-primary' : ''"
+                                class="flex items-center gap-3 px-8 h-12 leading-12 rounded-full transition-all duration-500 bg-slate-400 text-white">
                             <i class="lab-line-bag text-xl"></i>
                             <span class="whitespace-nowrap font-bold">{{ $t("button.add_to_cart") }}</span>
                         </button>
-                        <button type="button" @click="wishlist(product.wishlist = !product.wishlist)"
-                            :class="product.wishlist ? 'text-primary' : 'text-secondary'"
-                            class="flex items-center gap-3 px-8 h-12 leading-12 rounded-full transition-all duration-500 shadow-btn-secondary bg-white">
+                        <button type="button"
+                                @click="wishlist(product.wishlist = !product.wishlist)"
+                                :class="product.wishlist ? 'text-primary' : 'text-secondary'"
+                                class="flex items-center gap-3 px-8 h-12 leading-12 rounded-full transition-all duration-500 shadow-btn-secondary bg-white">
                             <i :class="product.wishlist ? 'lab-fill-heart' : 'lab-line-heart'"
-                                class="lab-line-heart text-xl"></i>
+                               class="lab-line-heart text-xl"></i>
                             <span class="whitespace-nowrap font-bold">{{ $t('button.favorite') }}</span>
                         </button>
-                    </div>
-                    <div class="flex flex-wrap items-center gap-8 mb-10">
-                        <a class="flex items-center gap-3 px-8 h-12 leading-12 rounded-full transition-all duration-500 bg-wp text-white"
-                            :href="'https://wa.me/whastapp?text=Hola%21%20Spazio%20Dise%C3%B1o%20y%20Confort%2C%20estoy%20interesado%20en%20comprar%3A%20' + encodeURIComponent(product.name)">
-                            <i class="lab-line-bag text-xl"></i>
-                            <span class="whitespace-nowrap font-bold">WhatsApp</span>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -137,25 +132,25 @@
                     <div class="rounded-[32px] border border-[#D9DBE9]">
                         <nav class="flex flex-wrap items-center p-4 sm:py-6 sm:px-8 gap-3 sm:gap-6">
                             <button type="button"
-                                @click.prevent="multiTargets($event, 'tab-btn', 'tab-div', 'tab_details')"
-                                class="tab-btn active text-sm sm:text-base font-bold leading-5 capitalize py-2 sm:py-3.5 px-5 sm:px-8 rounded-full border border-[#D9DBE9]">
+                                    @click.prevent="multiTargets($event, 'tab-btn', 'tab-div', 'tab_details')"
+                                    class="tab-btn active text-sm sm:text-base font-bold leading-5 capitalize py-2 sm:py-3.5 px-5 sm:px-8 rounded-full border border-[#D9DBE9]">
                                 {{ $t('label.details') }}
                             </button>
 
                             <button type="button"
-                                @click.prevent="multiTargets($event, 'tab-btn', 'tab-div', 'tab_videos')"
-                                class="tab-btn text-sm sm:text-base font-bold leading-5 capitalize py-2 sm:py-3.5 px-5 sm:px-8 rounded-full border border-[#D9DBE9]">
+                                    @click.prevent="multiTargets($event, 'tab-btn', 'tab-div', 'tab_videos')"
+                                    class="tab-btn text-sm sm:text-base font-bold leading-5 capitalize py-2 sm:py-3.5 px-5 sm:px-8 rounded-full border border-[#D9DBE9]">
                                 {{ $t('label.videos') }}
                             </button>
 
                             <button type="button"
-                                @click.prevent="multiTargets($event, 'tab-btn', 'tab-div', 'tab_reviews')"
-                                class="tab-btn text-sm sm:text-base font-bold leading-5 capitalize py-2 sm:py-3.5 px-5 sm:px-8 rounded-full border border-[#D9DBE9]">
+                                    @click.prevent="multiTargets($event, 'tab-btn', 'tab-div', 'tab_reviews')"
+                                    class="tab-btn text-sm sm:text-base font-bold leading-5 capitalize py-2 sm:py-3.5 px-5 sm:px-8 rounded-full border border-[#D9DBE9]">
                                 {{ $t('label.reviews') }}
                             </button>
                             <button type="button"
-                                @click.prevent="multiTargets($event, 'tab-btn', 'tab-div', 'tab_shipping_and_return')"
-                                class="tab-btn text-sm sm:text-base font-bold leading-5 capitalize py-2 sm:py-3.5 px-5 sm:px-8 rounded-full border border-[#D9DBE9]">
+                                    @click.prevent="multiTargets($event, 'tab-btn', 'tab-div', 'tab_shipping_and_return')"
+                                    class="tab-btn text-sm sm:text-base font-bold leading-5 capitalize py-2 sm:py-3.5 px-5 sm:px-8 rounded-full border border-[#D9DBE9]">
                                 {{ $t('label.shipping_and_return') }}
                             </button>
                         </nav>
@@ -173,7 +168,7 @@
                             </h3>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <iframe v-for="video in videos" :src="video.link"
-                                    class="w-full h-40 sm:h-64 rounded-2xl"></iframe>
+                                        class="w-full h-40 sm:h-64 rounded-2xl"></iframe>
                             </div>
                         </div>
 
@@ -182,11 +177,15 @@
                                 {{ $t('label.product_reviews') }}
                             </h3>
                             <div class="flex flex-wrap items-center gap-2 border-b border-gray-100 mb-6 pb-6">
-                                <starRating border-color="#FFBC1F" :rounded-corners="true" :padding="2.5"
-                                    :border-width="2.5" :star-size="11" class="-mt-0.5" inactive-color="#FFFFFF"
-                                    active-color="#FFBC1F" :round-start-rating="false" :show-rating="false"
-                                    :read-only="true" :max-rating="5"
-                                    :rating="(product.rating_star / product.rating_star_count)" />
+                                <starRating
+                                    border-color="#FFBC1F"
+                                    :rounded-corners="true" :padding="2.5"
+                                    :border-width="2.5"
+                                    :star-size="11" class="-mt-0.5" inactive-color="#FFFFFF"
+                                    active-color="#FFBC1F"
+                                    :round-start-rating="false" :show-rating="false" :read-only="true"
+                                    :max-rating="5"
+                                    :rating="(product.rating_star / product.rating_star_count)"/>
                                 <div v-if="product.rating_star_count > 0" class="flex items-center gap-1">
                                     <span class="text-base font-medium whitespace-nowrap text-text">
                                         {{ (product.rating_star / product.rating_star_count).toFixed(1) }}
@@ -194,10 +193,10 @@
                                     <span
                                         class="text-base font-medium whitespace-nowrap text-text hover:text-primary cursor-pointer">
                                         ({{
-        product.rating_star_count
-    }} {{
-            product.rating_star_count > 1 ? $t('label.reviews') : $t('label.review')
-        }})
+                                            product.rating_star_count
+                                        }} {{
+                                            product.rating_star_count > 1 ? $t('label.reviews') : $t('label.review')
+                                        }})
                                     </span>
                                 </div>
                             </div>
@@ -205,22 +204,29 @@
                             <div v-for="review in reviews" class="mb-8">
                                 <h4 class="text-lg font-semibold capitalize mb-2">{{ review.name }}</h4>
                                 <div class="flex flex-wrap items-center gap-2 mb-3">
-                                    <starRating border-color="#FFBC1F" inactive-color="#FFFFFF" active-color="#FFBC1F"
-                                        :rounded-corners="true" :padding="2.5" :border-width="2.5" :star-size="11"
-                                        class="-mt-0.5" :round-start-rating="false" :show-rating="false"
-                                        :read-only="true" :max-rating="5" :rating="review.star" />
+                                    <starRating
+                                        border-color="#FFBC1F"
+                                        inactive-color="#FFFFFF"
+                                        active-color="#FFBC1F"
+                                        :rounded-corners="true"
+                                        :padding="2.5" :border-width="2.5"
+                                        :star-size="11" class="-mt-0.5"
+                                        :round-start-rating="false"
+                                        :show-rating="false" :read-only="true"
+                                        :max-rating="5"
+                                        :rating="review.star"/>
                                 </div>
                                 <p class="mb-4">{{ review.review }}</p>
 
 
                                 <div class="flex flex-wrap gap-4" v-if="review.images.length > 0">
-                                    <img v-for="reviewImage in review.images" :src="reviewImage" alt="image"
-                                        class="w-20 rounded-lg">
+                                    <img v-for="reviewImage in review.images" :src="reviewImage" alt="image" class="w-20 rounded-lg">
                                 </div>
                             </div>
 
                             <button v-if="product.rating_star_count > reviews.length" @click.prevent="readMore"
-                                type="button" class="flex items-center justify-center gap-3 w-fit mx-auto text-primary">
+                                    type="button"
+                                    class="flex items-center justify-center gap-3 w-fit mx-auto text-primary">
                                 <span class="text-lg font-medium capitalize">{{ $t('label.read_more') }}</span>
                                 <i class="lab-line-down-arrow text-sm -mt-1"></i>
                             </button>
@@ -245,7 +251,7 @@
                 </h2>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-                <ProductListComponent v-if="relatedProducts.length > 0" :products="relatedProducts" />
+                <ProductListComponent v-if="relatedProducts.length > 0" :products="relatedProducts"/>
             </div>
         </div>
     </section>
@@ -253,9 +259,9 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+import {ref} from "vue";
+import {Swiper, SwiperSlide} from 'swiper/vue';
+import {FreeMode, Navigation, Thumbs} from 'swiper/modules';
 import LoadingComponent from "../components/LoadingComponent";
 import starRating from "vue-star-rating";
 import targetService from "../../../services/targetService";
@@ -279,7 +285,7 @@ export default {
         LoadingComponent
     },
     setup() {
-        const thumbsSwiper = ref(null);
+        const thumbsSwiper    = ref(null);
         const setThumbsSwiper = (swiper) => {
             thumbsSwiper.value = swiper;
         };
@@ -381,7 +387,7 @@ export default {
             }).catch((err) => {
                 if (err.response.status === 401) {
                     this.product.wishlist = false;
-                    router.push({ name: "auth.login" });
+                    router.push({name: "auth.login"});
                 }
             });
         },
@@ -391,7 +397,7 @@ export default {
         },
         show: function () {
             if (typeof this.$route.params.slug !== "undefined") {
-                this.loading.isActive = true;
+                this.loading.isActive  = true;
                 this.props.search.slug = this.$route.params.slug;
                 this.$store.dispatch("frontendProduct/show", this.props.search).then((res) => {
                     this.initProduct = {
@@ -405,7 +411,7 @@ export default {
                         oldPrice: res.data.data.old_price,
                         totalPrice: res.data.data.price
                     };
-                    this.temp = {
+                    this.temp        = {
                         name: res.data.data.name,
                         image: res.data.data.image,
                         isVariation: false,
@@ -441,19 +447,19 @@ export default {
                         this.loading.isActive = false;
                     });
 
-                    if (Object.keys(res.data.data.seo) && res.data.data.seo.title && res.data.data.seo.description) {
+                    if(Object.keys(res.data.data.seo) && res.data.data.seo.title && res.data.data.seo.description) {
                         let metaData = [
                             { name: 'title', content: res.data.data.seo.title },
-                            { name: 'description', content: res.data.data.seo.description },
+                            { name : 'description', content: res.data.data.seo.description },
                         ];
 
-                        if (res.data.data.seo.thumb && res.data.data.seo.cover) {
-                            metaData.push({ content: res.data.data.seo.thumb });
-                            metaData.push({ content: res.data.data.seo.cover });
+                        if(res.data.data.seo.thumb && res.data.data.seo.cover) {
+                            metaData.push({ content : res.data.data.seo.thumb });
+                            metaData.push({ content : res.data.data.seo.cover });
                         }
 
                         useHead({
-                            title: this.setting.company_name + ' - ' + res.data.data.seo.title,
+                            title : this.setting.company_name + ' - ' + res.data.data.seo.title,
                             meta: metaData
                         });
                     }
@@ -464,7 +470,7 @@ export default {
         },
         showRelatedProduct: function () {
             if (typeof this.$route.params.slug !== "undefined") {
-                this.loading.isActive = true;
+                this.loading.isActive  = true;
                 this.props.search.slug = this.$route.params.slug;
                 this.$store.dispatch("frontendProduct/relatedProducts", {
                     slug: this.$route.params.slug,
@@ -478,30 +484,30 @@ export default {
         },
         selectedVariationMethod: function (variation) {
             this.enableAddToCardButton = true;
-            this.selectedVariation = null;
+            this.selectedVariation     = null;
 
             this.temp.isVariation = this.initProduct.isVariation;
             this.temp.variationId = this.initProduct.variationId;
-            this.temp.sku = this.initProduct.sku;
-            this.temp.stock = this.initProduct.stock;
-            this.temp.quantity = this.initProduct.quantity;
-            this.temp.discount = this.initProduct.discount;
-            this.temp.price = this.initProduct.price;
-            this.temp.oldPrice = this.initProduct.oldPrice;
-            this.temp.totalPrice = this.initProduct.price;
+            this.temp.sku         = this.initProduct.sku;
+            this.temp.stock       = this.initProduct.stock;
+            this.temp.quantity    = this.initProduct.quantity;
+            this.temp.discount    = this.initProduct.discount;
+            this.temp.price       = this.initProduct.price;
+            this.temp.oldPrice    = this.initProduct.oldPrice;
+            this.temp.totalPrice  = this.initProduct.price;
 
             if (variation) {
                 this.selectedVariation = variation;
 
                 this.temp.isVariation = true;
                 this.temp.variationId = variation.id;
-                this.temp.sku = variation.sku;
-                this.temp.stock = variation.stock;
-                this.temp.quantity = 1;
-                this.temp.discount = 0;
-                this.temp.price = variation.price;
-                this.temp.oldPrice = variation.old_price;
-                this.temp.totalPrice = variation.price;
+                this.temp.sku         = variation.sku;
+                this.temp.stock       = variation.stock;
+                this.temp.quantity    = 1;
+                this.temp.discount    = 0;
+                this.temp.price       = variation.price;
+                this.temp.oldPrice    = variation.old_price;
+                this.temp.totalPrice  = variation.price;
 
                 if (variation.stock > 0) {
                     this.enableAddToCardButton = false;
@@ -540,7 +546,7 @@ export default {
         },
         addToCart: function () {
             this.enableAddToCardButton = true;
-            this.productArray = {
+            this.productArray          = {
                 name: this.temp.name,
                 product_id: this.temp.productId,
                 image: this.temp.image,
@@ -560,27 +566,27 @@ export default {
             if (this.selectedVariation) {
                 this.$store.dispatch("frontendProductVariation/ancestorsToString", this.selectedVariation.id).then((res) => {
                     this.productArray.variation_names = res.data.data;
-                    this.variationComponent = false;
+                    this.variationComponent           = false;
                     this.$store.dispatch("frontendCart/lists", this.productArray).then((res) => {
                         alertService.success(this.$t('message.add_to_cart'));
                         this.variationComponent = true;
-                        this.productArray = {};
-                        this.selectedVariation = null;
-                        this.temp.isVariation = this.initProduct.isVariation;
-                        this.temp.variationId = this.initProduct.variationId;
-                        this.temp.sku = this.initProduct.sku;
-                        this.temp.stock = this.initProduct.stock;
-                        this.temp.quantity = this.initProduct.quantity;
-                        this.temp.discount = this.initProduct.discount;
-                        this.temp.price = this.initProduct.price;
-                        this.temp.oldPrice = this.initProduct.oldPrice;
-                        this.temp.totalPrice = this.initProduct.price;
+                        this.productArray       = {};
+                        this.selectedVariation  = null;
+                        this.temp.isVariation   = this.initProduct.isVariation;
+                        this.temp.variationId   = this.initProduct.variationId;
+                        this.temp.sku           = this.initProduct.sku;
+                        this.temp.stock         = this.initProduct.stock;
+                        this.temp.quantity      = this.initProduct.quantity;
+                        this.temp.discount      = this.initProduct.discount;
+                        this.temp.price         = this.initProduct.price;
+                        this.temp.oldPrice      = this.initProduct.oldPrice;
+                        this.temp.totalPrice    = this.initProduct.price;
                     }).catch((err) => {
                         alertService.error(this.$t('message.maximum_quantity'));
                         this.variationComponent = true;
-                        this.selectedVariation = null;
-                        this.temp.stock = this.initProduct.stock;
-                        this.temp.quantity = this.initProduct.quantity;
+                        this.selectedVariation  = null;
+                        this.temp.stock         = this.initProduct.stock;
+                        this.temp.quantity      = this.initProduct.quantity;
                     });
                 }).catch((err) => {
                 });
@@ -588,23 +594,23 @@ export default {
                 this.$store.dispatch("frontendCart/lists", this.productArray).then((res) => {
                     alertService.success(this.$t('message.add_to_cart'));
                     this.enableAddToCardButton = false;
-                    this.productArray = {};
-                    this.selectedVariation = null;
-                    this.temp.isVariation = this.initProduct.isVariation;
-                    this.temp.variationId = this.initProduct.variationId;
-                    this.temp.sku = this.initProduct.sku;
-                    this.temp.stock = this.initProduct.stock;
-                    this.temp.quantity = this.initProduct.quantity;
-                    this.temp.discount = this.initProduct.discount;
-                    this.temp.price = this.initProduct.price;
-                    this.temp.oldPrice = this.initProduct.oldPrice;
-                    this.temp.totalPrice = this.initProduct.price;
+                    this.productArray          = {};
+                    this.selectedVariation     = null;
+                    this.temp.isVariation      = this.initProduct.isVariation;
+                    this.temp.variationId      = this.initProduct.variationId;
+                    this.temp.sku              = this.initProduct.sku;
+                    this.temp.stock            = this.initProduct.stock;
+                    this.temp.quantity         = this.initProduct.quantity;
+                    this.temp.discount         = this.initProduct.discount;
+                    this.temp.price            = this.initProduct.price;
+                    this.temp.oldPrice         = this.initProduct.oldPrice;
+                    this.temp.totalPrice       = this.initProduct.price;
                 }).catch((err) => {
                     alertService.error(this.$t('message.maximum_quantity'));
                     this.enableAddToCardButton = false;
-                    this.selectedVariation = null;
-                    this.temp.stock = this.initProduct.stock;
-                    this.temp.quantity = this.initProduct.quantity;
+                    this.selectedVariation     = null;
+                    this.temp.stock            = this.initProduct.stock;
+                    this.temp.quantity         = this.initProduct.quantity;
                 });
             }
         }
@@ -617,9 +623,3 @@ export default {
     }
 }
 </script>
-<style>
-.bg-wp {
-    --tw-bg-opacity: 1;
-    background-color: rgba(30, 176, 24, 1);
-}
-</style>

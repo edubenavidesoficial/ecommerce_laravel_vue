@@ -1,7 +1,7 @@
 <template>
     <LoadingComponent :props="loading" />
 
-    <footer class="pt-12 bg-spazio mobile:hidden">
+    <footer class="pt-12 bg-secondary mobile:hidden">
         <div class="container">
             <div class="row">
                 <div class="col-12 md:col-4 lg:col-5 mb-6 md:mb-0">
@@ -98,14 +98,8 @@
             <p class="text-xs font-medium text-white">{{ setting.site_copyright }}</p>
         </div>
     </footer>
-    <div class="whatsapp-button">
-        <a class="whatsapp-icon" href="https://wa.me/whastapp?text=Hola%21%20Gracias%20por%20ponerte%20en%20contacto%20con%20Spazio%20Dise%C3%B1o%20y%20Confort.%20Estamos%20encantados%20de%20ayudarte.%20Por%20favor%2C%20d%C3%A9janos%20saber%20en%20qu%C3%A9%20podemos%20ayudarte%20y%20te%20responderemos%20lo%20antes%20posible."
-           target="_blank"
-           rel="noopener noreferrer">
-            <i class="lab-fill-calling flex-shrink-0 text-white"></i>
-        </a>
-    </div>
 </template>
+
 
 <script>
 import statusEnum from "../../../enums/modules/statusEnum";
@@ -178,42 +172,3 @@ export default {
     }
 }
 </script>
-<style>
-.bg-spazio {
-  --tw-bg-opacity: 0.45; /* Cambiar la opacidad del color */
-  background-color: rgba(56, 53, 46, var(--tw-bg-opacity));
-}
-</style>
-<style scoped>
-    .whatsapp-button {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 1000; /* Ajusta el índice z según sea necesario */
-    }
-
-    .whatsapp-icon {
-        display: block;
-        width: 60px;
-        height: 60px;
-        background-color: #25d366; /* Color de fondo del botón */
-        border-radius: 50%; /* Hace que el botón sea redondo */
-        text-align: center;
-        line-height: 60px; /* Alinea el icono verticalmente */
-        transition: background-color 0.3s ease;
-    }
-
-    .whatsapp-icon:hover {
-        background-color: #128c7e; /* Cambia el color de fondo al pasar el mouse */
-    }
-
-    .whatsapp-icon i {
-        color: #fff; /* Color del icono */
-        font-size: 24px; /* Tamaño del icono */
-    }
-    @media screen and (max-width: 767px) {
-        .whatsapp-button {
-            display: none; /* Oculta el icono en pantallas pequeñas */
-        }
-    }
-</style>

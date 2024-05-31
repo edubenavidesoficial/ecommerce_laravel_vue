@@ -28,7 +28,7 @@ trait ConfirmableTrait
 
             $this->components->alert($warning);
 
-            $confirmed = confirm('Estás seguro de que quieres ejecutar este comando?', default: false);
+            $confirmed = confirm('Are you sure you want to run this command?', default: false);
 
             if (! $confirmed) {
                 $this->components->warn('Command cancelled.');
