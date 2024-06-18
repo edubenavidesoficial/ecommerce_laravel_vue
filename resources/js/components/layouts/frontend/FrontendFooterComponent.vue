@@ -98,6 +98,13 @@
             <p class="text-xs font-medium text-white">{{ setting.site_copyright }}</p>
         </div>
     </footer>
+    <div class="whatsapp-button">
+    <a class="whatsapp-icon" href="https://wa.me/593980693812?text=Hola%20bienvenidos%20a%20nuestra%20tienda%20virtual%20en%20que%20podemos%20ayudarte"
+       target="_blank"
+       rel="noopener noreferrer">
+        <i class="lab-fill-calling flex-shrink-0 text-white"></i>
+    </a>
+</div>
 </template>
 
 
@@ -172,3 +179,36 @@ export default {
     }
 }
 </script>
+<style scoped>
+    .whatsapp-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000; /* Ajusta el índice z según sea necesario */
+    }
+
+    .whatsapp-icon {
+        display: block;
+        width: 60px;
+        height: 60px;
+        background-color: #25d366; /* Color de fondo del botón */
+        border-radius: 50%; /* Hace que el botón sea redondo */
+        text-align: center;
+        line-height: 60px; /* Alinea el icono verticalmente */
+        transition: background-color 0.3s ease;
+    }
+
+    .whatsapp-icon:hover {
+        background-color: #128c7e; /* Cambia el color de fondo al pasar el mouse */
+    }
+
+    .whatsapp-icon i {
+        color: #fff; /* Color del icono */
+        font-size: 24px; /* Tamaño del icono */
+    }
+    @media screen and (max-width: 767px) {
+        .whatsapp-button {
+            display: none; /* Oculta el icono en pantallas pequeñas */
+        }
+    }
+</style>

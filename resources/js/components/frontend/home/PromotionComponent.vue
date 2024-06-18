@@ -2,7 +2,7 @@
     <LoadingComponent :props="loading" />
 
     <section v-if="promotions.length > 0" class="mb-10 sm:mb-20">
-        <div class="container">
+        <div style="margin-left: 2rem;margin-right: 2rem;">
             <Swiper dir="ltr" :speed="1000" class="ad-swiper" :breakpoints="breakpoints">
                 <SwiperSlide v-for="promotion in promotions" class="mobile:!w-52">
                     <router-link :to="{name: 'frontend.promotion.products', params: { slug: promotion.slug }}" class=" w-full">

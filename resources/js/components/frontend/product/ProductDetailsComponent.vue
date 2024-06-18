@@ -120,6 +120,13 @@
                             <span class="whitespace-nowrap font-bold">{{ $t('button.favorite') }}</span>
                         </button>
                     </div>
+                    <div class="flex flex-wrap items-center gap-8 mb-10">
+                        <a class="flex items-center gap-3 px-8 h-12 leading-12 rounded-full transition-all duration-500 bg-wp text-white"
+                            :href="'https://wa.me/593980693812?text=Hola%21%20Imporbensa%2C%20estoy%20interesado%20en%20comprar%3A%20' + encodeURIComponent(product.name)">
+                            <i class="lab-line-bag text-xl"></i>
+                            <span class="whitespace-nowrap font-bold">WhatsApp</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -623,3 +630,9 @@ export default {
     }
 }
 </script>
+<style>
+.bg-wp {
+    --tw-bg-opacity: 1;
+    background-color: rgba(30, 176, 24, 1);
+}
+</style>

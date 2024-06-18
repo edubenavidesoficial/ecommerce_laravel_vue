@@ -2,7 +2,7 @@
     <LoadingComponent :props="loading" />
 
     <section class="mb-3 sm:mb-10" v-if="brands.length > 1">
-        <div class="container">
+        <div style="margin-left: 2rem;margin-right: 2rem;">
             <h2 class="capitalize text-2xl sm:text-4xl font-bold -mb-10">
                 {{ $t('label.popular_brands') }}
             </h2>
