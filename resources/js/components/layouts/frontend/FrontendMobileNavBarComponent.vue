@@ -11,7 +11,7 @@
         </button>
 
         <button @click="showTarget('cart-canvas', 'canvas-active')" type="button" class="relative isolate -mt-11">
-            <i class="lab-line-bag text-lg w-12 h-12 !leading-12 text-center rounded-full shadow-cart bg-primary text-white"></i>
+            <i class="lab-line-bag text-lg w-12 h-12 !leading-12 text-center rounded-full shadow-cart bg-impor text-white"></i>
             <span v-if="carts.length > 0" class="absolute top-5 ltr:right-1.5 rtl:left-1.5 text-[10px] font-medium h-4 px-1 leading-[14px] text-center rounded-full border border-primary bg-[#FFBC1F]">
                 {{ carts.length }}
             </span>
@@ -74,3 +74,9 @@ export default {
     }
 }
 </script>
+<style>
+.bg-impor {
+    --tw-bg-opacity: 1;
+    background-color: rgb(69 155 205);
+}
+</style>

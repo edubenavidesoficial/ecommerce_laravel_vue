@@ -5,14 +5,14 @@
             <Swiper v-if="sliders.length > 0" :slides-per-view="1" :speed="1000" :loop="true" :navigation="true"
                     :pagination="{ clickable: true }" :autoplay="{ delay: 2500 }" :modules="modules"
                     class="banner-swiper">
-                <SwiperSlide v-for="slider in sliders">
+                <SwiperSlide v-for="slider in sliders" :key="slider.id">
                     <div v-if="slider.link">
-                        <a :href="slider.link">
-                            <img class="w-full rounded-2xl" :src="slider.image" alt="banner" loading="lazy">
+                        <a :href="slider.link" class="block w-full h-full">
+                            <img class="banner-image" :src="slider.image" alt="banner" loading="lazy">
                         </a>
                     </div>
-                    <div v-else>
-                        <img class="w-full rounded-2xl" :src="slider.image" alt="banner" loading="lazy">
+                    <div v-else class="block w-full h-full">
+                        <img class="banner-image" :src="slider.image" alt="banner" loading="lazy">
                     </div>
                 </SwiperSlide>
             </Swiper>
@@ -69,3 +69,14 @@ export default {
     }
 }
 </script>
+<style>
+.banner-swiper {
+    width: 100%;
+}
+
+.banner-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover the entire area without distortion */
+}
+</style>
