@@ -251,7 +251,7 @@
     </section>
 
     <section v-if="relatedProducts.length > 0" class="mb-10 sm:mb-20">
-        <div class="container">
+        <div class="container new">
             <div class="flex items-center justify-between gap-4 mb-5 sm:mb-7">
                 <h2 class="text-2xl sm:text-4xl font-bold capitalize">
                     {{ $t('label.related_products') }}
@@ -634,5 +634,9 @@ export default {
 .bg-wp {
     --tw-bg-opacity: 1;
     background-color: rgba(30, 176, 24, 1);
+}
+.new {
+    margin-left: 1rem !important;
+    margin-right: 1rem !important;
 }
 </style>
