@@ -17,6 +17,25 @@
                 </SwiperSlide>
             </Swiper>
         </div>
+        <div>
+    <Swiper :slides-per-view="1" :speed="1000" :loop="true" :navigation="true"
+            :autoplay="{ delay: 2500 }" :modules="modules"
+            class="banner-swiper">
+        <SwiperSlide>
+            <div class="text-slider">ENVÍO GRATIS A NIVEL NACIONAL</div>
+        </SwiperSlide>
+        <SwiperSlide>
+            <div class="text-slider">COMPRA SEGURA</div>
+        </SwiperSlide>
+        <SwiperSlide>
+            <div class="text-slider">INSTALACIÓN GRATIS</div>
+        </SwiperSlide>
+        <SwiperSlide>
+            <div class="text-slider">DIFERIDOS SIN INTERESES</div>
+        </SwiperSlide>
+    </Swiper>
+</div>
+
     </section>
 </template>
 
@@ -77,6 +96,19 @@ export default {
 .banner-image {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Cover the entire area without distortion */
+    object-fit: cover; 
+}
+
+.text-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px; /* Ajusta según tus necesidades */
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    background-color: #232d4f;
+    color: #ffffff;
+    padding: 10px;
 }
 </style>
