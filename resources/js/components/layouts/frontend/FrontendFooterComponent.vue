@@ -102,7 +102,7 @@
     <a class="whatsapp-icon" href="https://wa.me/593980693812?text=Hola%20bienvenidos%20a%20nuestra%20tienda%20virtual%20en%20que%20podemos%20ayudarte"
        target="_blank"
        rel="noopener noreferrer">
-        <i class="lab-fill-calling flex-shrink-0 text-white"></i>
+       <i class="fab fa-whatsapp fa-2x flex-shrink-0 text-white"></i>
     </a>
 </div>
 </template>
@@ -194,7 +194,7 @@ export default {
         background-color: #25d366; /* Color de fondo del botón */
         border-radius: 50%; /* Hace que el botón sea redondo */
         text-align: center;
-        line-height: 60px; /* Alinea el icono verticalmente */
+        line-height: 68px; /* Alinea el icono verticalmente */
         transition: background-color 0.3s ease;
     }
 

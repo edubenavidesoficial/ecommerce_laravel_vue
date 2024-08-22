@@ -3,9 +3,26 @@
 
 <head>
     <!-- REQUIRED META TAGS -->
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- SEO META TAGS -->
+<meta name="description" content="Imporbensa - Venta de electrodomésticos, motocicletas y cajas amplificadas en todo Ecuador. Visítanos en AV QUITO E IBARRA, SANTO DOMINGO.">
+<meta name="keywords" content="Electrodomésticos, Motocicletas, Cajas amplificadas, Ecuador, Santo Domingo, AV QUITO, Ibarra, Imporbensa">
+<meta name="author" content="Imporbensa">
+
+<!-- Open Graph Meta Tags (para compartir en redes sociales) -->
+<meta property="og:title" content="Imporbensa - Electrodomésticos, Motocicletas y Cajas Amplificadas">
+<meta property="og:description" content="Venta de electrodomésticos, motocicletas y cajas amplificadas en todo Ecuador. Ubicados en Santo Domingo.">
+<meta property="og:image" content="{{ $favicon }}">
+<meta property="og:url" content="https://imporbensa.com/">
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Imporbensa - Electrodomésticos, Motocicletas y Cajas Amplificadas">
+<meta name="twitter:description" content="Encuentra los mejores electrodomésticos, motocicletas y cajas amplificadas en todo Ecuador. Visítanos en Santo Domingo.">
+<meta name="twitter:image" content="{{ $favicon }}">
 
     <!-- CUSTOM STYLE -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">

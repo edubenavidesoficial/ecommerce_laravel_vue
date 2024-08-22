@@ -18,6 +18,12 @@
                     </router-link>
                 </SwiperSlide>
             </Swiper>
+            <div>
+                <div class="block w-full h-full relative">
+                    <img class="banner-image-cat" src="https://imporbensa.com/storage/169/banner.jpeg" alt="banner" loading="lazy">
+                    <a href="https://ibesa.com.ec/" class="banner-button">Mostrar</a>
+                </div>
+            </div>
         </div>
     </section>
 </template>
@@ -75,4 +81,45 @@ export default {
     }
 }
 </script>
+<style>
 
+.banner-button {
+    position: absolute;
+    top: 4px;
+    right: 5px;
+    padding: 1rem;
+    background-color: #ffffffd0;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: blue;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 30px;
+}
+
+@media (min-width: 768px){
+    .banner-button {
+        top: 28px;
+        right: 34px;
+        padding: 0.5rem 1rem;
+    }
+}
+
+.banner-button:hover {
+    background-color: #ffffff;
+}
+
+@media (max-width: 768px){
+    .banner-button {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+    }
+}
+.banner-image-cat {
+    margin-top: 1rem;
+    margin-bottom: 12px;
+    border-radius: 0.8rem;
+}
+</style>
