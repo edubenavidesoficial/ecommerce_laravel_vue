@@ -33,6 +33,10 @@
     <!-- FAV ICON -->
     <link rel="icon" type="image" href="{{ $favicon }}">
 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://sandbox-paybox.pagoplux.com/paybox/index.js"></script>
+    <script src="https://paybox.pagoplux.com/paybox/index.js"></script>
+
     @if (!blank($analytics))
         @foreach ($analytics as $analytic)
             @if (!blank($analytic->analyticSections))
@@ -89,9 +93,6 @@
     <script src="{{ asset('themes/default/js/tabs.js') }}"></script>
     <script src="{{ asset('themes/default/js/jqueryDropdown.js') }}"></script>
     <script src="{{ asset('themes/default/js/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://sandbox-paybox.pagoplux.com/paybox/index.js"></script>
-    <script src="https://paybox.pagoplux.com/paybox/index.js"></script>
 
 </body>
 

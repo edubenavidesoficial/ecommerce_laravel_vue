@@ -30,6 +30,7 @@
                         <img class="h-6" :src="paymentGateway.image" alt="payment" loading="lazy" />
                         <span class="text-xs font-medium">{{ paymentGateway.name }}</span>
                     </div>
+                    <div id="ButtonPaybox"></div>
                 </div>
             </div>
 
@@ -136,8 +137,11 @@ export default {
         },
     },
     mounted() {
-        this.loading.isActive = true;
-        this.$store.dispatch('frontendPaymentGateway/lists', { status: this.statusEnum.ACTIVE }).then(res => {
+    this.loading.isActive = true;
+
+    // Obtener pasarelas de pago
+    this.$store.dispatch('frontendPaymentGateway/lists', { status: this.statusEnum.ACTIVE })
+        .then(res => {
             if (res.data.data.length > 0) {
                 _.forEach(res.data.data, (gateway) => {
                     if (gateway.slug === "credit") {
@@ -153,46 +157,108 @@ export default {
         }).catch((err) => {
             this.loading.isActive = false;
         });
-    },
-    methods: {
-        selectPaymentMethod: function (paymentMethod) {
-            this.$store.dispatch("frontendCart/paymentMethod", paymentMethod);
-        },
-        confirmOrder: function (e) {
-            e.target.disabled = true;
-            this.form = {
-                subtotal: this.subtotal,
-                discount: this.discount,
-                tax: this.totalTax,
-                shipping_charge: this.shippingCharge,
-                total: this.total,
-                order_type: this.orderType,
-                shipping_id: Object.keys(this.getShippingAddress).length > 0 ? this.getShippingAddress.id : 0,
-                billing_id: Object.keys(this.getBillingAddress).length > 0 ? this.getBillingAddress.id : 0,
-                outlet_id: Object.keys(this.getOutletAddress).length > 0 ? this.getOutletAddress.id : 0,
-                coupon_id: Object.keys(this.cartCoupon).length > 0 ? this.cartCoupon.id : 0,
-                source: sourceEnum.WEB,
-                payment_method: Object.keys(this.paymentMethod).length > 0 ? this.paymentMethod.id : 0,
-                products: JSON.stringify(this.products)
+    // Inicializar Paybox cuando se cargue el script
+    sandboxScript.onload = () => {
+        console.log("Script de Paybox cargado correctamente.");
+        
+        // Esperar un momento antes de inicializar newPaymentGateway
+        setTimeout(() => {
+            if (typeof newPaymentGateway !== "undefined") {
+                console.log("newPaymentGateway definido correctamente.");
+                this.initializePaybox();  // Usando función de flecha para preservar el contexto de `this`
+            } else {
+                console.error("newPaymentGateway no está definido después de esperar.");
             }
+        }, 1000);  // Espera 1 segundo
+    };
+},
+methods: {
+    initializePaybox() {
+        // Define the data object
+        var data = {
+            PayboxRemail: "ventasonline@imporbensa.com",
+            PayboxSendmail: "ventasonline@imporbensa.com",
+            PayboxRename: "IMPORBENSA",
+            PayboxSendname: "Nombre tarjetahabiente",
+            PayboxBase0: "2.0",
+            PayboxBase12: "10.0",
+            PayboxDescription: "Descripcion del pago",
+            PayboxLanguage: "es",
+            PayboxDirection: "Direccion tarjetahabiente",
+            PayBoxClientPhone: 'Telefono tarjetahabiente',
+            PayboxProduction: false,
+            PayboxRecurrent: true,
+            PayboxIdPlan: '171',
+            PayboxPermitirCalendarizar: true,
+            PayboxPagoInmediato: true,
+            PayboxCobroPrueba: false,
+            PayBoxClientIdentification: 'Cedula tarjetahabiente',
+            PayboxAmountVariablePlan: true,
+            PayboxFrequencyPlan: 'MEN',
+            PayboxTieneIvaPlan: true,
+            PayboxDescriptionPlan: 'Descripcion plan',
+            PayboxEnvironment: 'sandbox',
+            PayboxPagoPlux: false,
+            PayboxIdElement: 'idElementoTest'
+        };
 
-            this.$store.dispatch('frontendOrder/save', this.form).then(orderResponse => {
-                this.loading.isActive = false;
-                let paymentSlug = Object.keys(this.paymentMethod).length > 0 ? this.paymentMethod.slug : '';
-                if (paymentSlug) {
-                    window.location.href = ENV.API_URL + "/payment/" + paymentSlug + "/pay/" + orderResponse.data.data.id;
-                } else {
-                    alertService.error(this.$t('message.payment_method_required'));
-                }
-            }).catch((err) => {
-                this.loading.isActive = false;
-                if (typeof err.response.data.errors === 'object') {
-                    _.forEach(err.response.data.errors, (error) => {
-                        alertService.error(error[0]);
-                    });
-                }
-            });
+        // Define the onAuthorize callback function
+        const onAuthorize = (response) => {
+            if (response.status == 'succeeded') {
+                console.log('Pago exitoso:', response);
+                window.location.href = '/payment-success?token=' + response.token;
+            } else {
+                console.error('Error en el pago:', response);
+                window.location.href = '/payment-failure';
+            }
+        };
+
+        // Check if newPaymentGateway is available and initialize it
+        if (typeof newPaymentGateway !== "undefined") {
+            newPaymentGateway.init(data, onAuthorize);
+        } else {
+            console.error("newPaymentGateway no está definido.");
         }
+    },
+    selectPaymentMethod: function (paymentMethod) {
+        this.$store.dispatch("frontendCart/paymentMethod", paymentMethod);
+    },
+    confirmOrder: function (e) {
+        e.target.disabled = true;
+        this.form = {
+            subtotal: this.subtotal,
+            discount: this.discount,
+            tax: this.totalTax,
+            shipping_charge: this.shippingCharge,
+            total: this.total,
+            order_type: this.orderType,
+            shipping_id: Object.keys(this.getShippingAddress).length > 0 ? this.getShippingAddress.id : 0,
+            billing_id: Object.keys(this.getBillingAddress).length > 0 ? this.getBillingAddress.id : 0,
+            outlet_id: Object.keys(this.getOutletAddress).length > 0 ? this.getOutletAddress.id : 0,
+            coupon_id: Object.keys(this.cartCoupon).length > 0 ? this.cartCoupon.id : 0,
+            source: sourceEnum.WEB,
+            payment_method: Object.keys(this.paymentMethod).length > 0 ? this.paymentMethod.id : 0,
+            products: JSON.stringify(this.products)
+        };
+
+        this.$store.dispatch('frontendOrder/save', this.form).then(orderResponse => {
+            this.loading.isActive = false;
+            let paymentSlug = Object.keys(this.paymentMethod).length > 0 ? this.paymentMethod.slug : '';
+            if (paymentSlug) {
+                window.location.href = ENV.API_URL + "/payment/" + paymentSlug + "/pay/" + orderResponse.data.data.id;
+            } else {
+                alertService.error(this.$t('message.payment_method_required'));
+            }
+        }).catch((err) => {
+            this.loading.isActive = false;
+            e.target.disabled = false; // Reactivar el botón en caso de error
+            if (typeof err.response.data.errors === 'object') {
+                _.forEach(err.response.data.errors, (error) => {
+                    alertService.error(error[0]);
+                });
+            }
+        });
     }
+},
 }
 </script>
